@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
 /*
     This is a program to dicount coupun to customers.
@@ -24,26 +27,64 @@ float calculateTotalDiscount(float discountInPercentage, float purchaseAmount) {
     return discountInPercentage*purchaseAmount;
 }
 
+char* formatAsRupiah(float amount) {
+    // Convert the float to an integer by rounding to the nearest integer
+    long long roundedAmount = (long long)(amount + 0.5);
+
+    // Create a character array to store the formatted string
+    char result[30]; // Assuming the maximum length of the result is 30 characters
+
+    // Check if the amount is greater than or equal to one billion
+    if (roundedAmount >= 1000000000LL) {
+        // Format the rupiah currency string with billion
+        snprintf(result, sizeof(result), "Rp %lld.%.3lld.%.3lld.%.3lld,-",
+                 roundedAmount / 1000000000LL,
+                 (roundedAmount % 1000000000LL) / 1000000LL,
+                 (roundedAmount % 1000000LL) / 1000LL,
+                 roundedAmount % 1000LL);
+    } else {
+        // Format the rupiah currency string without billion
+        if (roundedAmount >= 1000000LL) {
+            // Remove leading zeros in the millions place
+            snprintf(result, sizeof(result), "Rp %lld.%.3lld.%.3lld,-",
+                     roundedAmount / 1000000LL,
+                     (roundedAmount % 1000000LL) / 1000LL,
+                     roundedAmount % 1000LL);
+        } else {
+            // Remove leading zeros in the thousands place
+            snprintf(result, sizeof(result), "Rp %lld.%.3lld,-",
+                     roundedAmount / 1000LL,
+                     roundedAmount % 1000LL);
+        }
+    }
+
+    // Return the formatted string
+    return strdup(result);
+}
+
 int main() {
     int totalCouponCustomerReceived;
-    float totalAmountToBePaid, discountAmount, totalDiscountInPercentage, purchaseAmount;
+    float totalAmountToBePaid, discountAmount, discountInDecimal, purchaseAmount;
 
-    printf("Total pembelian =  ");
+    printf("Total pembelian = Rp ");
     scanf("%f", &purchaseAmount);
 
-    printf("Total pembelian = %f\n", purchaseAmount);
+    printf("Total pembelian = %s\n", formatAsRupiah(purchaseAmount));
     totalCouponCustomerReceived = calculateHowManyCouponTheCustomerWillReceive((int)purchaseAmount);
     if (totalCouponCustomerReceived > 0) {
         printf("Selamat anda mendapatkan %d kupon\n", totalCouponCustomerReceived);
-        totalDiscountInPercentage = totalCouponCustomerReceived*DISCOUNT_PERCENTAGE_PER_COUPON;
-        printf("total discount in percentage = %.2f", totalDiscountInPercentage);
+        discountInDecimal = totalCouponCustomerReceived*DISCOUNT_PERCENTAGE_PER_COUPON;
+        float discountInDecimalTime100 = discountInDecimal*100;
+        int discountInPercentage = (int) discountInDecimalTime100;
 
-        discountAmount = calculateTotalDiscount(totalDiscountInPercentage, purchaseAmount);
-        printf("total pengurangan discount = %.2f\n", discountAmount);
+        printf("total discount in percentage = %d%s\n", discountInPercentage, "%");
+
+        discountAmount = calculateTotalDiscount(discountInDecimal, purchaseAmount);
+        printf("total pengurangan discount = %s\n", formatAsRupiah(discountAmount));
     }
 
     totalAmountToBePaid = purchaseAmount-discountAmount;
-    printf("Total yang harus di bayarkan = %.2f\n", totalAmountToBePaid);
+    printf("Total yang harus di bayarkan = %s\n", formatAsRupiah(totalAmountToBePaid));
 
     return 0;
 }
