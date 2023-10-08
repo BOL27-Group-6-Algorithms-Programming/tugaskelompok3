@@ -11,11 +11,11 @@ struct Employee
     char degree[5];
     float salary;
     int overTime;
+    float overTimeSalary;
 };
 int main()
 {
     struct Employee employee;
-    float overTimeSalary;
 
     printf("Masukan Nama anda: ");
     scanf(" %[^\n]", &employee.name);
@@ -35,17 +35,17 @@ int main()
     if (strcmp(employee.degree, "D1") == 0 || strcmp(employee.degree, "d1") == 0)
     {
         employee.salary = 2500000;
-        overTimeSalary = 10000;
+        employee.overTimeSalary = 10000;
     }
     else if (strcmp(employee.degree, "D2") == 0 || strcmp(employee.degree, "d2") == 0)
     {
         employee.salary = 2000000;
-        overTimeSalary = 5000;
+        employee.overTimeSalary = 5000;
     }
     else if (strcmp(employee.degree, "D3") == 0 || strcmp(employee.degree, "d3") == 0)
     {
         employee.salary = 1500000;
-        overTimeSalary = 2500;
+        employee.overTimeSalary = 2500;
     }
     printf("\nNIP = %ld\n", employee.nip);
     printf("Nama = %s\n", employee.name);
@@ -61,8 +61,8 @@ int main()
     scanf(" %s", &employee.degree);
     printf("Masukan jam lembur (DALAM JAM): ");
     scanf("%d", &employee.overTime);
-    overTimeSalary = overTimeSalary * employee.overTime;
-    printf("Total gaji bulan ini: Rp.%.2f", employee.salary + overTimeSalary);
+    employee.overTimeSalary = employee.overTimeSalary * employee.overTime;
+    printf("Total gaji bulan ini: Rp.%.2f", employee.salary + employee.overTimeSalary);
 
     return 0;
 }
