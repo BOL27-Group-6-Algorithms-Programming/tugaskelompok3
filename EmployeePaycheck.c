@@ -6,7 +6,7 @@ struct Employee
     char name[50];
     long int nip;
     char address[100];
-    long int phoneNum;
+    char phoneNum[20];
     char position[20];
     char degree[5];
     float salary;
@@ -25,7 +25,7 @@ int main()
     printf("Masukan Alamat anda: ");
     scanf(" %[^\n]", &employee.address);
     printf("Masukan Nomer Handphone anda: ");
-    scanf("%ld", &employee.phoneNum);
+    scanf(" %s", &employee.phoneNum);
 
     printf("Masukan Jabatan anda: ");
     scanf(" %[^\n]", &employee.position);
@@ -50,7 +50,7 @@ int main()
     printf("\nNIP = %ld\n", employee.nip);
     printf("Nama = %s\n", employee.name);
     printf("Alamat = %s\n", employee.address);
-    printf("No HP = %ld\n", employee.phoneNum);
+    printf("No HP = %s\n", employee.phoneNum);
     printf("Jabatan = %s\n", employee.position);
     printf("Golongan = %s\n", employee.degree);
     printf("Gaji = Rp.%.2f\n\n", employee.salary);
