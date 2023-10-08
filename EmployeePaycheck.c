@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 struct Employee
 {
@@ -21,37 +22,47 @@ int main()
     printf("=========================================\n");
 
     struct Employee employee;
+    bool isDegreeValid = true;
 
     printf("Masukkan Nama Anda: ");
     scanf(" %[^\n]", &employee.name);
     printf("Masukkan NIP Anda: ");
     scanf("%ld", &employee.nip);
-
     printf("Masukkan Alamat Anda: ");
     scanf(" %[^\n]", &employee.address);
     printf("Masukkan Nomor Handphone Anda: ");
     scanf(" %s", &employee.phoneNum);
-
     printf("Masukkan Jabatan Anda: ");
     scanf(" %[^\n]", &employee.position);
-    printf("Masukkan Golongan Anda: ");
-    scanf(" %s", &employee.degree);
 
-    if (strcmp(employee.degree, "D1") == 0 || strcmp(employee.degree, "d1") == 0)
+    do
     {
-        employee.salary = 2500000;
-        employee.overTimeSalary = 10000;
-    }
-    else if (strcmp(employee.degree, "D2") == 0 || strcmp(employee.degree, "d2") == 0)
-    {
-        employee.salary = 2000000;
-        employee.overTimeSalary = 5000;
-    }
-    else if (strcmp(employee.degree, "D3") == 0 || strcmp(employee.degree, "d3") == 0)
-    {
-        employee.salary = 1500000;
-        employee.overTimeSalary = 2500;
-    }
+        printf("Masukkan Golongan Anda: ");
+        scanf(" %s", &employee.degree);
+        if (strcmp(employee.degree, "D1") == 0 || strcmp(employee.degree, "d1") == 0)
+        {
+            employee.salary = 2500000;
+            employee.overTimeSalary = 10000;
+            isDegreeValid = true;
+        }
+        else if (strcmp(employee.degree, "D2") == 0 || strcmp(employee.degree, "d2") == 0)
+        {
+            employee.salary = 2000000;
+            employee.overTimeSalary = 5000;
+            isDegreeValid = true;
+        }
+        else if (strcmp(employee.degree, "D3") == 0 || strcmp(employee.degree, "d3") == 0)
+        {
+            employee.salary = 1500000;
+            employee.overTimeSalary = 2500;
+            isDegreeValid = true;
+        }
+        else
+        {
+            printf("Masukan golongan yang valid (D1, D2, D3)\n");
+            isDegreeValid = false;
+        }
+    } while (isDegreeValid == false);
 
     printf("--------------------------------------------------\n");
 
