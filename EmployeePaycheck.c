@@ -13,23 +13,28 @@ struct Employee
     int overTime;
     float overTimeSalary;
 };
+
 int main()
 {
+    printf("=========================================\n");
+    printf("      Program Penghitungan Gaji\n");
+    printf("=========================================\n");
+
     struct Employee employee;
 
-    printf("Masukan Nama anda: ");
+    printf("Masukkan Nama Anda: ");
     scanf(" %[^\n]", &employee.name);
-    printf("Masukan NIP anda: ");
+    printf("Masukkan NIP Anda: ");
     scanf("%ld", &employee.nip);
 
-    printf("Masukan Alamat anda: ");
+    printf("Masukkan Alamat Anda: ");
     scanf(" %[^\n]", &employee.address);
-    printf("Masukan Nomer Handphone anda: ");
+    printf("Masukkan Nomor Handphone Anda: ");
     scanf(" %s", &employee.phoneNum);
 
-    printf("Masukan Jabatan anda: ");
+    printf("Masukkan Jabatan Anda: ");
     scanf(" %[^\n]", &employee.position);
-    printf("Masukan Golongan anda: ");
+    printf("Masukkan Golongan Anda: ");
     scanf(" %s", &employee.degree);
 
     if (strcmp(employee.degree, "D1") == 0 || strcmp(employee.degree, "d1") == 0)
@@ -47,22 +52,29 @@ int main()
         employee.salary = 1500000;
         employee.overTimeSalary = 2500;
     }
-    printf("\nNIP = %ld\n", employee.nip);
-    printf("Nama = %s\n", employee.name);
-    printf("Alamat = %s\n", employee.address);
-    printf("No HP = %s\n", employee.phoneNum);
-    printf("Jabatan = %s\n", employee.position);
-    printf("Golongan = %s\n", employee.degree);
-    printf("Gaji = Rp.%.2f\n\n", employee.salary);
 
-    printf("Masukan NIP: ");
+    printf("--------------------------------------------------\n");
+
+    printf("\nNIP              : %ld\n", employee.nip);
+    printf("Nama             : %s\n", employee.name);
+    printf("Alamat           : %s\n", employee.address);
+    printf("No HP            : %s\n", employee.phoneNum);
+    printf("Jabatan          : %s\n", employee.position);
+    printf("Golongan         : %s\n", employee.degree);
+    printf("Gaji Pokok       : Rp.%.2f\n", employee.salary);
+
+    printf("--------------------------------------------------\n");
+
+    printf("Masukkan NIP     : ");
     scanf("%ld", &employee.nip);
-    printf("Masukan Golongan: ");
+    printf("Masukkan Golongan: ");
     scanf(" %s", &employee.degree);
-    printf("Masukan jam lembur (DALAM JAM): ");
+    printf("Masukkan Jam Lembur (DALAM JAM): ");
     scanf("%d", &employee.overTime);
     employee.overTimeSalary = employee.overTimeSalary * employee.overTime;
-    printf("Total gaji bulan ini: Rp.%.2f", employee.salary + employee.overTimeSalary);
+
+    printf("--------------------------------------------------\n");
+    printf("Total Gaji Bulan Ini: Rp.%.2f\n", employee.salary + employee.overTimeSalary);
 
     return 0;
 }
